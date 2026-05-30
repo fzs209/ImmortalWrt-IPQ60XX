@@ -98,7 +98,7 @@ jobs:
         cd $OPENWRT_PATH
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        git submodule update --init --recursive
+        git submodule update --remote --recursive
 
     - name: Load Custom Configuration(加载自定义配置)
       run: |
