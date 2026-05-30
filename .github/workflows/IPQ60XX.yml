@@ -98,13 +98,14 @@ jobs:
         cd $OPENWRT_PATH
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        git submodule update --remote --recursive
+        git submodule update --init --remote --recursive
 
     - name: Load Custom Configuration(加载自定义配置)
       run: |
         cd $OPENWRT_PATH
         cp ipq6000.config .config
         make defconfig
+        grep "luci-app-lanspeed" .config || echo "::error::警告: luci-app-lanspeed 依赖丢失，已被系统移除！"
 
     - name: Download DL Package(下载DL软件包)
       run: |
